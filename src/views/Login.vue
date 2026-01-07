@@ -82,8 +82,9 @@ const goForgot = () => router.push("/forgot-password")
 const handleLogin = async () => {
   try {
     const data = await loginUser(email.value, password.value)
+    // stocker le token dans le localStorage et rediriger vers le dashboard
     localStorage.setItem("token", data.token)
-    router.push("/dashboard")
+    router.push("/")
   } catch (error) {
     console.error(error.message)
   }

@@ -11,6 +11,11 @@ import Home from '@/views/Home.vue'
 const routes = [
   {
     path: '/',
+    name: 'dashboard',
+    component: DashboardView
+  },
+  {
+    path: '/login',
     name: 'login',
     component: LoginView
   },
@@ -23,11 +28,6 @@ const routes = [
     path: '/home',
     name: 'home',
     component: Home
-  },
-  {
-    path: '/dashboard',
-    name: 'dashboard',
-    component: DashboardView
   },
   {
     path: '/forgot-password',

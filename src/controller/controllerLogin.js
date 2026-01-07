@@ -5,7 +5,7 @@ import { BASE_URL } from "../server/config.js";
 export async function registerUser(email, password, name, surname, role) {
   if (!name || !surname || !email || !password || !role) {
     throw new Error("Tous les champs sont obligatoires");
-  }
+  } 
 
   try {
     const response = await axios.post(`${BASE_URL}/api/register`, {

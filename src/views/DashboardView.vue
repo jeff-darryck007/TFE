@@ -1,5 +1,16 @@
 <script setup lang="ts">
 import Navbar from './Navbar.vue'
+import '@fortawesome/fontawesome-free/css/all.css';
+import { ref } from 'vue';
+
+// Vérifier si le token existe dans localStorage
+const isLoggedIn = ref(!!localStorage.getItem('token'));
+
+// Fonction de déconnexion
+function logout() {
+  localStorage.removeItem('token');
+  isLoggedIn.value = false;
+}
 </script>
 
 <template>
@@ -13,22 +24,34 @@ import Navbar from './Navbar.vue'
 
       <!-- SIDEBAR -->
       <aside class="sidebar">
-        <h3 class="sidebar-title">À la une</h3>
+        <h3 class="sidebar-title">Utilisateurs (102)</h3>
         <ul>
-          <li>Autos</li>
-          <li>Immo</li>
-          <li>Payer et envoyer</li>
-          <li>Envoyer avec bpost</li>
+          <li><i class="fas fa-arrow-right"></i> Donnateurs (35)</li>
+          <li><i class="fas fa-arrow-right"></i> Demandeurs (12)</li>
         </ul>
 
-        <h3 class="sidebar-title sidebar-section">Catégories</h3>
+        <h3 class="sidebar-title sidebar-section">Catégories (25)</h3>
         <ul>
-          <li>Animaux & Accessoires</li>
-          <li>Antiquités & Art</li>
-          <li>Articles professionnels</li>
-          <li>Autos</li>
-          <li>Autos : Divers</li>
-          <li>Autos : Pièces & Accessoires</li>
+          <li>Bureau</li>
+          <li>Appareil électroniques</li>
+          <li>Meubles</li>
+          <li><a href="http://">Toutes les catégories ...</a></li>
+        </ul>
+        
+        <h3 class="sidebar-title sidebar-section">Autre</h3>
+        <ul>
+          <li>
+            <i class="fas fa-question-circle"></i> Aide
+          </li>
+          <li v-if="!isLoggedIn">
+            <i class="fas fa-sign-in-alt"></i> <a href="/login">Connexion</a>
+          </li>
+          <li v-if="!isLoggedIn">
+            <i class="fas fa-user-plus"></i> <a href="/register">Ouvrir un compte</a>
+          </li>
+          <li v-else>
+            <i class="fas fa-sign-out-alt"></i> <a href="" @click.prevent="logout">Déconnexion</a>
+          </li>
         </ul>
       </aside>
 
@@ -74,6 +97,26 @@ import Navbar from './Navbar.vue'
 </template>
 
 <style>
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin: 10px 0;
+  font-size: 17px;
+}
+
+a {
+  text-decoration: none;
+  color: #007bff; /* Couleur par défaut des liens */
+}
+
+i {
+  margin-right: 8px; /* Espacement entre l'icône et le texte */
+  font-size: 20px;
+}
+
 .page-container {
   background: #f3f3f3;
   min-height: 100vh;
@@ -102,6 +145,7 @@ import Navbar from './Navbar.vue'
 
 .sidebar-title {
   font-weight: bold;
+  font-size: 20px;
 }
 
 .sidebar-section {

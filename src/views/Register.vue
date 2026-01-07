@@ -1,5 +1,4 @@
 <template>
-  <Navbar />
   <div class="register-container">
     <div class="register-box">
       <div class="avatar animate-pop">
@@ -33,7 +32,6 @@
           <select v-model="role" required>
             <option value="" disabled>Choisir un rôle</option>
             <option value="donateur">Donateur</option>
-            <option value="admin">Admin</option>
             <option value="visiteur">Visiteur</option>
           </select>
         </div>
@@ -137,7 +135,7 @@ const handleRegister = async () => {
     successMessage.value = "Compte créé avec succès 🎉"
 
     setTimeout(() => {
-      router.push("/login")
+      router.push("/")
     }, 1500)
 
   } catch (error) {
