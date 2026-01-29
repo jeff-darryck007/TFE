@@ -50,3 +50,18 @@ export async function loginUser(email, password) {
     }
   }
 }
+
+// fonction pour recuperer les informaqtions de l'utilisateur connecté
+export async function fetchUserProfile(token) {
+  try {
+    const response = await axios.get(`${BASE_URL}/api/get_user/${token}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return response.data; // renvoie les données de l'utilisateur
+  } catch (error) {
+    throw new Error("Erreur lors de la récupération du profil utilisateur");
+  }
+}

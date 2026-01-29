@@ -5,6 +5,19 @@ import { ref } from 'vue';
 
 // Vérifier si le token existe dans localStorage
 const isLoggedIn = ref(!!localStorage.getItem('token'));
+const roles = ref(localStorage.getItem('roles') || 'null');
+
+console.log("Roles from localStorage:", roles.value);
+
+function checkIsAdmin(roles) {
+  const rolesArray = roles.split(",");
+  return Array.isArray(rolesArray) && rolesArray.includes('admin')
+}
+
+const isAdmin = checkIsAdmin(roles.value);
+
+console.log("Roles from localStorage:", isAdmin);
+
 
 // Fonction de déconnexion
 function logout() {
@@ -22,7 +35,6 @@ function logout() {
 
     <div class="content">
 
-      <!-- SIDEBAR -->
       <aside class="sidebar">
         <h3 class="sidebar-title">Utilisateurs (102)</h3>
         <ul>
@@ -53,6 +65,19 @@ function logout() {
             <i class="fas fa-sign-out-alt"></i> <a href="" @click.prevent="logout">Déconnexion</a>
           </li>
         </ul>
+
+        <!-- ADMIN -->
+        <div v-if="isLoggedIn && isAdmin">
+          <h3 class="sidebar-title sidebar-section">Administration</h3>
+          <ul>
+            <li><i class="fas fa-users"></i> Gestion des utilisateurs</li>
+            <li><i class="fas fa-comments"></i> Gestion des commentaires</li>
+            <li><i class="fas fa-bullhorn"></i> Gestion des annonces</li>
+            <li><i class="fas fa-chart-line"></i> Statistiques globales</li>
+            <li><i class="fas fa-credit-card"></i> Gestion des plans d’abonnement</li>
+          </ul>
+        </div>
+
       </aside>
 
       <!-- LISTING -->

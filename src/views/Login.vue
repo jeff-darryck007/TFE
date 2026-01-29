@@ -84,7 +84,9 @@ const handleLogin = async () => {
     const data = await loginUser(email.value, password.value)
     // stocker le token dans le localStorage et rediriger vers le dashboard
     localStorage.setItem("token", data.token)
-    router.push("/")
+    localStorage.setItem("idUser", data.id)
+    localStorage.setItem("roles", data.roles)
+    router.push("/") 
   } catch (error) {
     console.error(error.message)
   }
